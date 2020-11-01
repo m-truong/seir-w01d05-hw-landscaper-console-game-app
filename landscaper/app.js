@@ -37,6 +37,10 @@ while (userAction !== "stop" && totalEarned !== 1000) {
         if (userAction === "n") {
             alert("Game Over!"); 
             console.log("Game has stopped running");
+            // RESET totalEarned to $0! 
+            totalEarned = 0; 
+            break;
+
         }
              
 
@@ -90,12 +94,29 @@ while (userAction !== "stop" && totalEarned !== 1000) {
             // don't need an else-statement 
     }
 
+     // 5. upgrade to 'team of starving students' 
+     if (currTool.name === "fancy battery-powered lawnmower" && totalEarned === 500) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
+        // prompt() user to upgrade to nextTool! 
+        userAction = prompt(`You can now upgrade to the ${tools[4].name}!`, "y or n?"); 
+            // check if (yes) 
+            if (userAction === "y") {
+                // reassign currTool equal to next Tool-Object in the array! 
+                currTool = tools[4];
+                // THEN decrease totalEarned by the currTool.cost 
+                // totalEarned -= currTool.cost;
+                totalEarned -= currTool.cost;
+                console.log(totalEarned); 
+                console.log(`Upgraded to ${tools[4].name}!`);
+            }
+            // don't need an else-statement 
+    }
 
-    // 4. copy and paste the logic for EVERY tool! START! 
+    // 6. copy and paste the logic for EVERY tool! START! 
                 
     // need FINAL WINNING STATEMENT 
     if (currTool.name === "team of starving students" && totalEarned === 1000) {
-        alert("You win!");
+        alert("You've completed the Landscaper Game!");
+        console.log("Game is complete!");
     }
 }
 
