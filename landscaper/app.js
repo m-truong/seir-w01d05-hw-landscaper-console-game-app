@@ -21,7 +21,7 @@ let currTool = tools[0];
 // while not at winning condition! totalEarned ==== 1000 
 
 // ***** KEEP CHANGING STOP CONDITION UPP HERE ********
-while (userAction !== "stop" && totalEarned !== 100) { 
+while (userAction !== "stop" && totalEarned !== 1000) { 
 
     // keep prompting to ask if want to keep cutting lawns? 
     userAction = prompt("Do you want to keep cutting lawns?", "y or n"); 
@@ -52,7 +52,7 @@ while (userAction !== "stop" && totalEarned !== 100) {
                 // totalEarned -= currTool.cost;
                 totalEarned -= currTool.cost;
                 console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[1].name}`); 
+                console.log(`Upgraded to ${tools[1].name}!`); 
             }
             // don't need an else-statement 
     }
@@ -68,7 +68,24 @@ while (userAction !== "stop" && totalEarned !== 100) {
                 // totalEarned -= currTool.cost;
                 totalEarned -= currTool.cost;
                 console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[2].name}`);
+                console.log(`Upgraded to ${tools[2].name}!`);
+            }
+            // don't need an else-statement 
+    }
+
+     // 4. upgrade to 'fancy battery-powered lawnmower' 
+     if (currTool.name === "old-timey push lawnmower" && totalEarned === 250) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
+        // prompt() user to upgrade to nextTool! 
+        userAction = prompt(`You can now upgrade to the ${tools[3].name}!`, "y or n?"); 
+            // check if (yes) 
+            if (userAction === "y") {
+                // reassign currTool equal to next Tool-Object in the array! 
+                currTool = tools[3];
+                // THEN decrease totalEarned by the currTool.cost 
+                // totalEarned -= currTool.cost;
+                totalEarned -= currTool.cost;
+                console.log(totalEarned); 
+                console.log(`Upgraded to ${tools[3].name}!`);
             }
             // don't need an else-statement 
     }
