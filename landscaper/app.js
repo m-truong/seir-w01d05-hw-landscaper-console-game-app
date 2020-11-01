@@ -1,12 +1,15 @@
-// Make sure to use "stop" when game first runs! in order to load the Chrome Tools properly!
-console.log("Game is running");
 alert("You are starting a landscaping business, but all you have are you teeth!"); 
 
-// global variables
-let userAction = null; // use as killSwitch
+/**
+ * global variables
+ */
+let userAction = null; 
 let totalEarned = 0; 
-let winAmount = 10;
-// landscaping array of objects 
+let winAmount = 1000;
+
+/**
+ * Landscaper tool array 
+ */
 const tools = [
     { name: 'teeth', cost: 0, payout: 1 },
     { name: 'rusty scissors', cost: 5, payout: 5},
@@ -14,118 +17,73 @@ const tools = [
     { name: 'fancy battery-powered lawnmower', cost: 250, payout: 100},
     { name: 'team of starving students', cost: 500, payout: 250 }
 ]
-// start with teeth
-let currTool = tools[0];
 
-// currStatus() method 
-function currStatus(choice) {
-    // if (userReply === yes) keep cutting! 
-    if (choice === "y") {
-        // use currTool.payout to increase totalEarned until it hits the following if-statement! 
-        // totalEarned += currTool.payout;
-            totalEarned += currTool.payout;
-            console.log(totalEarned); 
+/** 
+ * Iterable k
+ */
+let k = 0; 
+let currTool = tools[k];
+
+/**
+ * The cutGrass() is a function that continuously prompts the player for an input of "y or n". 
+ * If the player inputs "y", the game continues to run and the totalEarned increases.
+ * If the player inputs "n", the game is reset, and the player's totalEarned progress restarts 
+ * at 0, and the current tool restarts at teeth.
+ */
+const cutGrass = () => {
+    if (userAction === "y") {
+        totalEarned += currTool.payout;
+    }
+    if (userAction === "n") {
+        alert("Game Over!"); 
+        totalEarned = 0; 
+        currTool = tools[0]; 
+    }
+}
+
+/**
+ * The upgradeTool() is a function that checks if the totalEarned is enough to purchase the next tool.
+ * Then it reassigns currTool to the next tool, decrements the totalEarned, 
+ * and iterates k to the next tool array index. 
+ */ 
+const upgradeTool = () => {
+    if (k < 4) {
+        if (currTool.name === tools[k].name && totalEarned === tools[k+1].cost) { 
+            userAction = prompt(`You can now upgrade to the ${tools[k+1].name}!`, "y or n?"); 
+            if (userAction === "y") {
+                currTool = tools[k+1];
+                totalEarned -= currTool.cost;
+                k++;
+            }
         }
-        // if (userReply === no) exit game and alert() Game Over! 
-        if (choice === "n") {
-            alert("Game Over!"); 
-            console.log("Game progress has been reset!");
-            // RESET totalEarned to $0! 
-            totalEarned = 0; 
-            currTool = tools[0]; 
-            // return;
-        }
-}
-
-// upgradeTool() method
-function upgradeTool() {
-    
-}
-
-// 2. use while loop to keep incrementing money earned with prompt using currTool.payout 
-// while not at winning condition! totalEarned ==== 1000 
-
-// ***** KEEP CHANGING STOP CONDITION UPP HERE ********
-while (userAction !== "stop" && totalEarned !== 1000) { 
-
-    // keep prompting to ask if want to keep cutting lawns? 
-    userAction = prompt("Do you want to keep cutting lawns?", "y or n"); 
-
-    currStatus(userAction);
-
-    // 3. upgrade to 'rusty-scissors' 
-    if (currTool.name === "teeth" && totalEarned === 5) {
-        // prompt() user to upgrade to nextTool! 
-        userAction = prompt(`You can now upgrade to the ${tools[1].name}!`, "y or n?"); 
-            // check if (yes) 
-            if (userAction === "y") {
-                // reassign currTool equal to next Tool-Object in the array! 
-                currTool = tools[1];
-                // THEN decrease totalEarned by the currTool.cost 
-                // totalEarned -= currTool.cost;
-                totalEarned -= currTool.cost;
-                console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[1].name}!`); 
-            }
-            // don't need an else-statement 
-    }
-     // 3. upgrade to 'old-timey push lawnmower' 
-     if (currTool.name === "rusty scissors" && totalEarned === 25) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
-        // prompt() user to upgrade to nextTool! 
-        userAction = prompt(`You can now upgrade to the ${tools[2].name}!`, "y or n?"); 
-            // check if (yes) 
-            if (userAction === "y") {
-                // reassign currTool equal to next Tool-Object in the array! 
-                currTool = tools[2];
-                // THEN decrease totalEarned by the currTool.cost 
-                // totalEarned -= currTool.cost;
-                totalEarned -= currTool.cost;
-                console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[2].name}!`);
-            }
-            // don't need an else-statement 
-    }
-
-     // 4. upgrade to 'fancy battery-powered lawnmower' 
-     if (currTool.name === "old-timey push lawnmower" && totalEarned === 250) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
-        // prompt() user to upgrade to nextTool! 
-        userAction = prompt(`You can now upgrade to the ${tools[3].name}!`, "y or n?"); 
-            // check if (yes) 
-            if (userAction === "y") {
-                // reassign currTool equal to next Tool-Object in the array! 
-                currTool = tools[3];
-                // THEN decrease totalEarned by the currTool.cost 
-                // totalEarned -= currTool.cost;
-                totalEarned -= currTool.cost;
-                console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[3].name}!`);
-            }
-            // don't need an else-statement 
-    }
-
-     // 5. upgrade to 'team of starving students' 
-     if (currTool.name === "fancy battery-powered lawnmower" && totalEarned === 500) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
-        // prompt() user to upgrade to nextTool! 
-        userAction = prompt(`You can now upgrade to the ${tools[4].name}!`, "y or n?"); 
-            // check if (yes) 
-            if (userAction === "y") {
-                // reassign currTool equal to next Tool-Object in the array! 
-                currTool = tools[4];
-                // THEN decrease totalEarned by the currTool.cost 
-                // totalEarned -= currTool.cost;
-                totalEarned -= currTool.cost;
-                console.log(totalEarned); 
-                console.log(`Upgraded to ${tools[4].name}!`);
-            }
-            // don't need an else-statement 
-    }
-
-    // 6. copy and paste the logic for EVERY tool! START! 
-                
-    // need FINAL WINNING STATEMENT 
-    if (currTool.name === "team of starving students" && totalEarned === 1000) {
-        alert("You've completed the Landscaper Game!");
-        console.log("Game is complete!");
     }
 }
 
+/**
+ * The winningStatement() is a function that checks if the player has reached 
+ * the winning amount of $1000 and has upgraded to the final tool. 
+ * If so, the player is shown a winning message. 
+ */
+const winningStatement = () => {
+     if (currTool.name === tools[4].name && totalEarned === winAmount) {
+        alert("Congratulations! You've completed the Landscaper Game!");
+    }
+}
+
+/**
+ * The startLandscaper() is a function that starts the Landscaper game's while-loop 
+ * and executes the cutGrass(), upgradeTool() and winningStatement() functions. 
+ */
+const startLandscaper = () => { 
+    while (userAction !== "s" && totalEarned !== winAmount) { 
+        userAction = prompt("Do you want to keep cutting lawns?", "y or n");
+        cutGrass();
+        upgradeTool(); 
+        winningStatement();
+    } 
+}
+
+/** 
+ * The Landscaper game starts down here. 
+ */
+startLandscaper(); 
