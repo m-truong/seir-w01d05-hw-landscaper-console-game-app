@@ -1,10 +1,12 @@
-// start off with money 
+// Make sure to use "stop" when game first runs! in order to load the Chrome Tools properly!
 console.log("Game is running");
+alert("You are starting a landscaping business, but all you have are you teeth!"); 
+
+// global variables
 let userAction = null; // use as killSwitch
 let totalEarned = 0; 
 let winAmount = 10;
-
-// Landscaping Tools Array of Objects! 
+// landscaping array of objects 
 const tools = [
     { name: 'teeth', cost: 0, payout: 1 },
     { name: 'rusty scissors', cost: 5, payout: 5},
@@ -12,10 +14,33 @@ const tools = [
     { name: 'fancy battery-powered lawnmower', cost: 250, payout: 100},
     { name: 'team of starving students', cost: 500, payout: 250 }
 ]
+// start with teeth
+let currTool = tools[0];
 
-// pseudocode! // no player choice to say Yes/or/No yet! and get back the String from prompt()!
-// 1. start with teeth
-let currTool = tools[0]; 
+// currStatus() method 
+function currStatus(choice) {
+    // if (userReply === yes) keep cutting! 
+    if (choice === "y") {
+        // use currTool.payout to increase totalEarned until it hits the following if-statement! 
+        // totalEarned += currTool.payout;
+            totalEarned += currTool.payout;
+            console.log(totalEarned); 
+        }
+        // if (userReply === no) exit game and alert() Game Over! 
+        if (choice === "n") {
+            alert("Game Over!"); 
+            console.log("Game progress has been reset!");
+            // RESET totalEarned to $0! 
+            totalEarned = 0; 
+            currTool = tools[0]; 
+            // return;
+        }
+}
+
+// upgradeTool() method
+function upgradeTool() {
+    
+}
 
 // 2. use while loop to keep incrementing money earned with prompt using currTool.payout 
 // while not at winning condition! totalEarned ==== 1000 
@@ -26,23 +51,7 @@ while (userAction !== "stop" && totalEarned !== 1000) {
     // keep prompting to ask if want to keep cutting lawns? 
     userAction = prompt("Do you want to keep cutting lawns?", "y or n"); 
 
-        // if (userReply === yes) keep cutting! 
-        if (userAction === "y") {
-        // use currTool.payout to increase totalEarned until it hits the following if-statement! 
-        // totalEarned += currTool.payout;
-            totalEarned += currTool.payout;
-            console.log(totalEarned); 
-        }
-        // if (userReply === no) exit game and alert() Game Over! 
-        if (userAction === "n") {
-            alert("Game Over!"); 
-            console.log("Game has stopped running");
-            // RESET totalEarned to $0! 
-            totalEarned = 0; 
-            break;
-
-        }
-             
+    currStatus(userAction);
 
     // 3. upgrade to 'rusty-scissors' 
     if (currTool.name === "teeth" && totalEarned === 5) {
