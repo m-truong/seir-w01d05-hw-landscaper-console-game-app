@@ -19,7 +19,9 @@ let currTool = tools[0];
 
 // 2. use while loop to keep incrementing money earned with prompt using currTool.payout 
 // while not at winning condition! totalEarned ==== 1000 
-while (userAction !== "stop" && totalEarned !== 10) { 
+
+// ***** KEEP CHANGING STOP CONDITION UPP HERE ********
+while (userAction !== "stop" && totalEarned !== 100) { 
 
     // keep prompting to ask if want to keep cutting lawns? 
     userAction = prompt("Do you want to keep cutting lawns?", "y or n"); 
@@ -50,11 +52,12 @@ while (userAction !== "stop" && totalEarned !== 10) {
                 // totalEarned -= currTool.cost;
                 totalEarned -= currTool.cost;
                 console.log(totalEarned); 
+                console.log(`Upgraded to ${tools[1].name}`); 
             }
             // don't need an else-statement 
     }
      // 3. upgrade to 'old-timey push lawnmower' 
-     if (currTool.name === "old-timey push lawnmower" && totalEarned === 25) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
+     if (currTool.name === "rusty scissors" && totalEarned === 25) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
         // prompt() user to upgrade to nextTool! 
         userAction = prompt(`You can now upgrade to the ${tools[2].name}!`, "y or n?"); 
             // check if (yes) 
@@ -65,6 +68,7 @@ while (userAction !== "stop" && totalEarned !== 10) {
                 // totalEarned -= currTool.cost;
                 totalEarned -= currTool.cost;
                 console.log(totalEarned); 
+                console.log(`Upgraded to ${tools[2].name}`);
             }
             // don't need an else-statement 
     }
