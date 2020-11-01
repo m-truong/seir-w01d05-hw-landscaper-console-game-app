@@ -39,10 +39,8 @@ while (userAction !== "stop" && totalEarned !== 10) {
              
 
     // 3. upgrade to 'rusty-scissors' 
-
     if (currTool.name === "teeth" && totalEarned === 5) {
         // prompt() user to upgrade to nextTool! 
-
         userAction = prompt(`You can now upgrade to the ${tools[1].name}!`, "y or n?"); 
             // check if (yes) 
             if (userAction === "y") {
@@ -53,7 +51,21 @@ while (userAction !== "stop" && totalEarned !== 10) {
                 totalEarned -= currTool.cost;
                 console.log(totalEarned); 
             }
-
+            // don't need an else-statement 
+    }
+     // 3. upgrade to 'old-timey push lawnmower' 
+     if (currTool.name === "old-timey push lawnmower" && totalEarned === 25) { // OHH Logically CANNOT even go BACK A TOOL ANYWAYS!  
+        // prompt() user to upgrade to nextTool! 
+        userAction = prompt(`You can now upgrade to the ${tools[2].name}!`, "y or n?"); 
+            // check if (yes) 
+            if (userAction === "y") {
+                // reassign currTool equal to next Tool-Object in the array! 
+                currTool = tools[2];
+                // THEN decrease totalEarned by the currTool.cost 
+                // totalEarned -= currTool.cost;
+                totalEarned -= currTool.cost;
+                console.log(totalEarned); 
+            }
             // don't need an else-statement 
     }
 
@@ -61,7 +73,7 @@ while (userAction !== "stop" && totalEarned !== 10) {
     // 4. copy and paste the logic for EVERY tool! START! 
                 
     // need FINAL WINNING STATEMENT 
-    if (totalEarned === 10) {
+    if (currTool.name === "team of starving students" && totalEarned === 1000) {
         alert("You win!");
     }
 }
